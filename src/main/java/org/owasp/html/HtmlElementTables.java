@@ -123,7 +123,7 @@ public final class HtmlElementTables {
     COLGROUP_TAG = indexForName("colgroup");
     IFRAME_TAG = indexForName("iframe");
 
-    List<FreeWrapper> freeWrappers = List.of(
+    List<FreeWrapper> freeWrappers = CollectionsHelper.listOf(
         new FreeWrapper(
             LI_TAG,
             // LI_TAG is allowed here since an LI can appear when an LI is on
@@ -406,7 +406,7 @@ public final class HtmlElementTables {
 
     /** */
     HtmlElementNames(String... canonNames) {
-      this.canonNames = List.of(canonNames);
+      this.canonNames = CollectionsHelper.listOf(canonNames);
     }
 
     /**
@@ -721,7 +721,7 @@ public final class HtmlElementTables {
   }
 
   static final Comparator<int[]> COMPARE_BY_ZEROTH =
-      new Comparator<>() {
+      new Comparator<int[]>() {
         public int compare(int[] a, int[] b) {
           return Integer.compare(a[0], b[0]);
         }

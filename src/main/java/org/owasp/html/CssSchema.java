@@ -262,9 +262,9 @@ public final class CssSchema {
   static {
     Map<String, String> zeroFns = Collections.emptyMap();
     Map<String, Property> builder = new HashMap<>();
-    Set<String> mozBorderRadiusLiterals0 = Set.of("/");
-    Set<String> mozOpacityLiterals0 = Set.of("inherit");
-    Set<String> mozOutlineLiterals0 = Set.of(
+    Set<String> mozBorderRadiusLiterals0 = CollectionsHelper.setOf("/");
+    Set<String> mozOpacityLiterals0 = CollectionsHelper.setOf("inherit");
+    Set<String> mozOutlineLiterals0 = CollectionsHelper.setOf(
         "aliceblue", "antiquewhite", "aqua", "aquamarine", "azure", "beige",
         "bisque", "black", "blanchedalmond", "blue", "blueviolet", "brown",
         "burlywood", "cadetblue", "chartreuse", "chocolate", "coral",
@@ -292,39 +292,39 @@ public final class CssSchema {
         "silver", "skyblue", "slateblue", "slategray", "snow", "springgreen",
         "steelblue", "tan", "teal", "thistle", "tomato", "turquoise", "violet",
         "wheat", "white", "whitesmoke", "yellow", "yellowgreen");
-    Set<String> mozOutlineLiterals1 = Set.of(
+    Set<String> mozOutlineLiterals1 = CollectionsHelper.setOf(
         "dashed", "dotted", "double", "groove", "outset", "ridge", "solid");
-    Set<String> mozOutlineLiterals2 = Set.of("thick", "thin");
-    Set<String> mozOutlineLiterals3 = Set.of(
+    Set<String> mozOutlineLiterals2 = CollectionsHelper.setOf("thick", "thin");
+    Set<String> mozOutlineLiterals3 = CollectionsHelper.setOf(
         "hidden", "inherit", "inset", "invert", "medium", "none");
     Map<String, String> mozOutlineFunctions =
-      Map.<String, String>of(
+      CollectionsHelper.mapOf(
         "rgb(", "rgb()", "rgba(", "rgba()",
         "hsl(", "hsl()", "hsla(", "hsla()");
     Set<String> mozOutlineColorLiterals0 =
-      Set.of("inherit", "invert");
+      CollectionsHelper.setOf("inherit", "invert");
     Set<String> mozOutlineStyleLiterals0 =
-      Set.of("hidden", "inherit", "inset", "none");
+      CollectionsHelper.setOf("hidden", "inherit", "inset", "none");
     Set<String> mozOutlineWidthLiterals0 =
-      Set.of("inherit", "medium");
+      CollectionsHelper.setOf("inherit", "medium");
     Set<String> oTextOverflowLiterals0 =
-      Set.of("clip", "ellipsis");
-    Set<String> azimuthLiterals0 = Set.of(
+      CollectionsHelper.setOf("clip", "ellipsis");
+    Set<String> azimuthLiterals0 = CollectionsHelper.setOf(
         "behind", "center-left", "center-right", "far-left", "far-right",
         "left-side", "leftwards", "right-side", "rightwards");
-    Set<String> azimuthLiterals1 = Set.of("left", "right");
+    Set<String> azimuthLiterals1 = CollectionsHelper.setOf("left", "right");
     Set<String> azimuthLiterals2 =
-      Set.of("center", "inherit");
-    Set<String> backgroundLiterals0 = Set.of(
+      CollectionsHelper.setOf("center", "inherit");
+    Set<String> backgroundLiterals0 = CollectionsHelper.setOf(
         "border-box", "contain", "content-box", "cover", "padding-box");
     Set<String> backgroundLiterals1 =
-      Set.of("no-repeat", "repeat-x", "repeat-y", "round", "space");
-    Set<String> backgroundLiterals2 = Set.of("bottom", "top");
-    Set<String> backgroundLiterals3 = Set.of(
+      CollectionsHelper.setOf("no-repeat", "repeat-x", "repeat-y", "round", "space");
+    Set<String> backgroundLiterals2 = CollectionsHelper.setOf("bottom", "top");
+    Set<String> backgroundLiterals3 = CollectionsHelper.setOf(
         ",", "/", "auto", "center", "fixed", "inherit", "local", "none",
         "repeat", "scroll", "transparent");
     Map<String, String> backgroundFunctions =
-      Map.of(
+      CollectionsHelper.mapOf(
       "image(", "image()",
       "linear-gradient(", "linear-gradient()",
       "radial-gradient(", "radial-gradient()",
@@ -333,80 +333,80 @@ public final class CssSchema {
       "rgb(", "rgb()", "rgba(", "rgba()",
       "hsl(", "hsl()", "hsla(", "hsla()");
     Set<String> backgroundAttachmentLiterals0 =
-      Set.of(",", "fixed", "local", "scroll");
+      CollectionsHelper.setOf(",", "fixed", "local", "scroll");
     Set<String> backgroundColorLiterals0 =
-      Set.of("inherit", "transparent");
+      CollectionsHelper.setOf("inherit", "transparent");
     Set<String> backgroundImageLiterals0 =
-      Set.of(",", "none");
+      CollectionsHelper.setOf(",", "none");
     Map<String, String> backgroundImageFunctions =
-      Map.<String, String>of(
+      CollectionsHelper.mapOf(
           "image(", "image()",
           "linear-gradient(", "linear-gradient()",
           "radial-gradient(", "radial-gradient()",
           "repeating-linear-gradient(", "repeating-linear-gradient()",
           "repeating-radial-gradient(", "repeating-radial-gradient()");
-    Set<String> backgroundPositionLiterals0 = Set.of(
+    Set<String> backgroundPositionLiterals0 = CollectionsHelper.setOf(
         ",", "center");
-    Set<String> backgroundRepeatLiterals0 = Set.of(
+    Set<String> backgroundRepeatLiterals0 = CollectionsHelper.setOf(
         ",", "repeat");
-    Set<String> borderLiterals0 = Set.of(
+    Set<String> borderLiterals0 = CollectionsHelper.setOf(
         "hidden", "inherit", "inset", "medium", "none", "transparent");
-    Set<String> borderCollapseLiterals0 = Set.of(
+    Set<String> borderCollapseLiterals0 = CollectionsHelper.setOf(
         "collapse", "inherit", "separate");
-    Set<String> bottomLiterals0 = Set.of("auto", "inherit");
-    Set<String> boxShadowLiterals0 = Set.of(
+    Set<String> bottomLiterals0 = CollectionsHelper.setOf("auto", "inherit");
+    Set<String> boxShadowLiterals0 = CollectionsHelper.setOf(
         ",", "inset", "none");
-    Set<String> clearLiterals0 = Set.of(
+    Set<String> clearLiterals0 = CollectionsHelper.setOf(
         "both", "inherit", "none");
     Map<String, String> clipFunctions =
-        Map.<String, String>of("rect(", "rect()");
-    Set<String> contentLiterals0 = Set.of("none", "normal");
-    Set<String> cueLiterals0 = Set.of("inherit", "none");
-    Set<String> cursorLiterals0 = Set.of(
+        Collections.singletonMap("rect(", "rect()");
+    Set<String> contentLiterals0 = CollectionsHelper.setOf("none", "normal");
+    Set<String> cueLiterals0 = CollectionsHelper.setOf("inherit", "none");
+    Set<String> cursorLiterals0 = CollectionsHelper.setOf(
         "all-scroll", "col-resize", "crosshair", "default", "e-resize",
         "hand", "help", "move", "n-resize", "ne-resize", "no-drop",
         "not-allowed", "nw-resize", "pointer", "progress", "row-resize",
         "s-resize", "se-resize", "sw-resize", "text", "vertical-text",
         "w-resize", "wait");
-    Set<String> cursorLiterals1 = Set.of(
+    Set<String> cursorLiterals1 = CollectionsHelper.setOf(
         ",", "auto", "inherit");
-    Set<String> directionLiterals0 = Set.of("ltr", "rtl");
-    Set<String> displayLiterals0 = Set.of(
+    Set<String> directionLiterals0 = CollectionsHelper.setOf("ltr", "rtl");
+    Set<String> displayLiterals0 = CollectionsHelper.setOf(
         "-moz-inline-box", "-moz-inline-stack", "block", "inline",
         "inline-block", "inline-table", "list-item", "run-in", "table",
         "table-caption", "table-cell", "table-column", "table-column-group",
         "table-footer-group", "table-header-group", "table-row",
         "table-row-group");
-    Set<String> elevationLiterals0 = Set.of(
+    Set<String> elevationLiterals0 = CollectionsHelper.setOf(
         "above", "below", "higher", "level", "lower");
-    Set<String> emptyCellsLiterals0 = Set.of("hide", "show");
+    Set<String> emptyCellsLiterals0 = CollectionsHelper.setOf("hide", "show");
     //Map<String, String> filterFunctions =
     //  Map.<String, String>of("alpha(", "alpha()");
-    Set<String> fontLiterals0 = Set.of(
+    Set<String> fontLiterals0 = CollectionsHelper.setOf(
         "100", "200", "300", "400", "500", "600", "700", "800", "900", "bold",
         "bolder", "lighter");
-    Set<String> fontLiterals1 = Set.of(
+    Set<String> fontLiterals1 = CollectionsHelper.setOf(
         "large", "larger", "small", "smaller", "x-large", "x-small",
         "xx-large", "xx-small", "xxx-large", "medium");
-    Set<String> fontLiterals2 = Set.of(
+    Set<String> fontLiterals2 = CollectionsHelper.setOf(
         "caption", "icon", "menu", "message-box", "small-caption",
         "status-bar");
-    Set<String> fontLiterals3 = Set.of(
+    Set<String> fontLiterals3 = CollectionsHelper.setOf(
         "cursive", "fantasy", "monospace", "sans-serif", "serif");
-    Set<String> fontLiterals4 = Set.of("italic", "oblique");
-    Set<String> fontLiterals5 = Set.of(
+    Set<String> fontLiterals4 = CollectionsHelper.setOf("italic", "oblique");
+    Set<String> fontLiterals5 = CollectionsHelper.setOf(
         ",", "/", "inherit", "medium", "normal", "small-caps");
-    Set<String> fontFamilyLiterals0 = Set.of(",", "inherit");
-    Set<String> fontStretchLiterals0 = Set.of(
+    Set<String> fontFamilyLiterals0 = CollectionsHelper.setOf(",", "inherit");
+    Set<String> fontStretchLiterals0 = CollectionsHelper.setOf(
         "condensed", "expanded", "extra-condensed", "extra-expanded",
         "narrower", "semi-condensed", "semi-expanded", "ultra-condensed",
         "ultra-expanded", "wider");
-    Set<String> fontStretchLiterals1 = Set.of("normal");
-    Set<String> fontStyleLiterals0 = Set.of(
+    Set<String> fontStretchLiterals1 = CollectionsHelper.setOf("normal");
+    Set<String> fontStyleLiterals0 = CollectionsHelper.setOf(
         "inherit", "normal");
-    Set<String> fontVariantLiterals0 = Set.of(
+    Set<String> fontVariantLiterals0 = CollectionsHelper.setOf(
         "inherit", "normal", "small-caps");
-    Set<String> listStyleLiterals0 = Set.of(
+    Set<String> listStyleLiterals0 = CollectionsHelper.setOf(
         "armenian", "cjk-decimal", "decimal", "decimal-leading-zero", "disc",
         "disclosure-closed", "disclosure-open", "ethiopic-numeric", "georgian",
         "hebrew", "hiragana", "hiragana-iroha", "japanese-formal",
@@ -416,82 +416,82 @@ public final class CssSchema {
         "lower-roman", "simp-chinese-formal", "simp-chinese-informal",
         "square", "trad-chinese-formal", "trad-chinese-informal",
         "upper-alpha", "upper-latin", "upper-roman");
-    Set<String> listStyleLiterals1 = Set.of(
+    Set<String> listStyleLiterals1 = CollectionsHelper.setOf(
         "inside", "outside");
-    Set<String> listStyleLiterals2 = Set.of(
+    Set<String> listStyleLiterals2 = CollectionsHelper.setOf(
         "circle", "inherit", "none");
-    Set<String> maxHeightLiterals0 = Set.of(
+    Set<String> maxHeightLiterals0 = CollectionsHelper.setOf(
         "auto", "inherit", "none");
-    Set<String> overflowLiterals0 = Set.of(
+    Set<String> overflowLiterals0 = CollectionsHelper.setOf(
         "auto", "hidden", "inherit", "scroll", "visible");
-    Set<String> overflowWrapLiterals0 = Set.of(
+    Set<String> overflowWrapLiterals0 = CollectionsHelper.setOf(
         "normal", "break-word", "anywhere", "inherit");
-    Set<String> overflowXLiterals0 = Set.of(
+    Set<String> overflowXLiterals0 = CollectionsHelper.setOf(
         "no-content", "no-display");
-    Set<String> overflowXLiterals1 = Set.of(
+    Set<String> overflowXLiterals1 = CollectionsHelper.setOf(
         "auto", "hidden", "scroll", "visible");
-    Set<String> pageBreakAfterLiterals0 = Set.of(
+    Set<String> pageBreakAfterLiterals0 = CollectionsHelper.setOf(
         "always", "auto", "avoid", "inherit");
-    Set<String> pageBreakInsideLiterals0 = Set.of(
+    Set<String> pageBreakInsideLiterals0 = CollectionsHelper.setOf(
         "auto", "avoid", "inherit");
-    Set<String> pitchLiterals0 = Set.of(
+    Set<String> pitchLiterals0 = CollectionsHelper.setOf(
         "high", "low", "x-high", "x-low");
-    Set<String> playDuringLiterals0 = Set.of(
+    Set<String> playDuringLiterals0 = CollectionsHelper.setOf(
         "auto", "inherit", "mix", "none", "repeat");
-    Set<String> positionLiterals0 = Set.of(
+    Set<String> positionLiterals0 = CollectionsHelper.setOf(
         "absolute", "relative", "static");
-    Set<String> speakLiterals0 = Set.of(
+    Set<String> speakLiterals0 = CollectionsHelper.setOf(
         "inherit", "none", "normal", "spell-out");
-    Set<String> speakHeaderLiterals0 = Set.of(
+    Set<String> speakHeaderLiterals0 = CollectionsHelper.setOf(
         "always", "inherit", "once");
-    Set<String> speakNumeralLiterals0 = Set.of(
+    Set<String> speakNumeralLiterals0 = CollectionsHelper.setOf(
         "continuous", "digits");
-    Set<String> speakPunctuationLiterals0 = Set.of(
+    Set<String> speakPunctuationLiterals0 = CollectionsHelper.setOf(
         "code", "inherit", "none");
-    Set<String> speechRateLiterals0 = Set.of(
+    Set<String> speechRateLiterals0 = CollectionsHelper.setOf(
         "fast", "faster", "slow", "slower", "x-fast", "x-slow");
-    Set<String> tableLayoutLiterals0 = Set.of(
+    Set<String> tableLayoutLiterals0 = CollectionsHelper.setOf(
         "auto", "fixed", "inherit");
-    Set<String> textAlignLiterals0 = Set.of(
+    Set<String> textAlignLiterals0 = CollectionsHelper.setOf(
         "center", "inherit", "justify");
-    Set<String> textDecorationLiterals0 = Set.of(
+    Set<String> textDecorationLiterals0 = CollectionsHelper.setOf(
         "blink", "line-through", "overline", "underline");
-    Set<String> textTransformLiterals0 = Set.of(
+    Set<String> textTransformLiterals0 = CollectionsHelper.setOf(
         "capitalize", "lowercase", "uppercase");
-    Set<String> textWrapLiterals0 = Set.of(
+    Set<String> textWrapLiterals0 = CollectionsHelper.setOf(
         "suppress", "unrestricted");
-    Set<String> unicodeBidiLiterals0 = Set.of(
+    Set<String> unicodeBidiLiterals0 = CollectionsHelper.setOf(
         "bidi-override", "embed");
-    Set<String> verticalAlignLiterals0 = Set.of(
+    Set<String> verticalAlignLiterals0 = CollectionsHelper.setOf(
         "baseline", "middle", "sub", "super", "text-bottom", "text-top");
-    Set<String> visibilityLiterals0 = Set.of(
+    Set<String> visibilityLiterals0 = CollectionsHelper.setOf(
         "collapse", "hidden", "inherit", "visible");
-    Set<String> voiceFamilyLiterals0 = Set.of(
+    Set<String> voiceFamilyLiterals0 = CollectionsHelper.setOf(
         "child", "female", "male");
-    Set<String> volumeLiterals0 = Set.of(
+    Set<String> volumeLiterals0 = CollectionsHelper.setOf(
         "loud", "silent", "soft", "x-loud", "x-soft");
-    Set<String> whiteSpaceLiterals0 = Set.of(
+    Set<String> whiteSpaceLiterals0 = CollectionsHelper.setOf(
         "-moz-pre-wrap", "-o-pre-wrap", "-pre-wrap", "nowrap", "pre",
         "pre-line", "pre-wrap");
-    Set<String> wordBreakLiterals0 = Set.of(
+    Set<String> wordBreakLiterals0 = CollectionsHelper.setOf(
         "break-all", "break-word", "keep-all", "normal");
-    Set<String> wordWrapLiterals0 = Set.of(
+    Set<String> wordWrapLiterals0 = CollectionsHelper.setOf(
         "anywhere", "break-word", "normal");
-    Set<String> rgb$FunLiterals0 = Set.of(",");
-    Set<String> linearGradient$FunLiterals0 = Set.of(
+    Set<String> rgb$FunLiterals0 = CollectionsHelper.setOf(",");
+    Set<String> linearGradient$FunLiterals0 = CollectionsHelper.setOf(
         ",", "to");
-    Set<String> radialGradient$FunLiterals0 = Set.of(
+    Set<String> radialGradient$FunLiterals0 = CollectionsHelper.setOf(
         "at", "closest-corner", "closest-side", "ellipse", "farthest-corner",
         "farthest-side");
-    Set<String> radialGradient$FunLiterals1 = Set.of(
+    Set<String> radialGradient$FunLiterals1 = CollectionsHelper.setOf(
         ",", "center", "circle");
-    Set<String> rect$FunLiterals0 = Set.of(",", "auto");
-	//Set<String> alpha$FunLiterals0 = Set.of("=", "opacity");
+    Set<String> rect$FunLiterals0 = CollectionsHelper.setOf(",", "auto");
+    //Set<String> alpha$FunLiterals0 = CollectionsHelper.SetOf("=", "opacity");
     Property mozBorderRadius =
        new Property(5, mozBorderRadiusLiterals0, zeroFns);
     builder.put("-moz-border-radius", mozBorderRadius);
     Property mozBorderRadiusBottomleft =
-       new Property(5, Set.<String>of(), zeroFns);
+       new Property(5, Collections.emptySet(), zeroFns);
     builder.put("-moz-border-radius-bottomleft", mozBorderRadiusBottomleft);
     Property mozOpacity = new Property(1, mozOpacityLiterals0, zeroFns);
     builder.put("-moz-opacity", mozOpacity);
@@ -864,7 +864,7 @@ public final class CssSchema {
     return Collections.unmodifiableSet(all);
   }
 
-  static final Set<String> DEFAULT_WHITELIST = Set.of(
+  static final Set<String> DEFAULT_WHITELIST = CollectionsHelper.setOf(
       "-moz-border-radius",
       "-moz-border-radius-bottomleft",
       "-moz-border-radius-bottomright",

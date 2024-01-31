@@ -30,6 +30,7 @@ package org.owasp.html;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -99,11 +100,11 @@ public class HtmlStreamRendererTest extends TestCase {
 
   public final void testIllegalElementName() throws Exception {
     renderer.openDocument();
-    renderer.openTag(":svg", List.<String>of());
-    renderer.openTag("svg:", List.<String>of());
-    renderer.openTag("-1", List.<String>of());
-    renderer.openTag("svg::svg", List.<String>of());
-    renderer.openTag("a@b", List.<String>of());
+    renderer.openTag(":svg", Collections.emptyList());
+    renderer.openTag("svg:", Collections.emptyList());
+    renderer.openTag("-1", Collections.emptyList());
+    renderer.openTag("svg::svg", Collections.emptyList());
+    renderer.openTag("a@b", Collections.emptyList());
     renderer.closeDocument();
 
     String output = rendered.toString();
@@ -122,11 +123,11 @@ public class HtmlStreamRendererTest extends TestCase {
 
   public final void testIllegalAttributeName() throws Exception {
     renderer.openDocument();
-    renderer.openTag("div", List.of(":svg", "x"));
-    renderer.openTag("div", List.of("svg:", "x"));
-    renderer.openTag("div", List.of("-1", "x"));
-    renderer.openTag("div", List.of("svg::svg", "x"));
-    renderer.openTag("div", List.of("a@b", "x"));
+    renderer.openTag("div", CollectionsHelper.listOf(":svg", "x"));
+    renderer.openTag("div", CollectionsHelper.listOf("svg:", "x"));
+    renderer.openTag("div", CollectionsHelper.listOf("-1", "x"));
+    renderer.openTag("div", CollectionsHelper.listOf("svg::svg", "x"));
+    renderer.openTag("div", CollectionsHelper.listOf("a@b", "x"));
     renderer.closeDocument();
 
     String output = rendered.toString();
@@ -145,7 +146,7 @@ public class HtmlStreamRendererTest extends TestCase {
 
   public final void testCdataContainsEndTag1() throws Exception {
     renderer.openDocument();
-    renderer.openTag("script", List.of("type", "text/javascript"));
+    renderer.openTag("script", CollectionsHelper.listOf("type", "text/javascript"));
     renderer.text("document.write('<SCRIPT>alert(42)</SCRIPT>')");
     renderer.closeTag("script");
     renderer.closeDocument();
@@ -160,7 +161,7 @@ public class HtmlStreamRendererTest extends TestCase {
 
   public final void testCdataContainsEndTag2() throws Exception {
     renderer.openDocument();
-    renderer.openTag("style", List.of("type", "text/css"));
+    renderer.openTag("style", CollectionsHelper.listOf("type", "text/css"));
     renderer.text("/* </St");
     // Split into two text chunks, and insert NULs.
     renderer.text("\0yle> */");
@@ -177,7 +178,7 @@ public class HtmlStreamRendererTest extends TestCase {
 
   public final void testRcdataContainsEndTag() throws Exception {
     renderer.openDocument();
-    renderer.openTag("textarea", List.<String>of());
+    renderer.openTag("textarea", Collections.emptyList());
     renderer.text("<textarea></textarea>");
     renderer.closeTag("textarea");
     renderer.closeDocument();
@@ -204,7 +205,7 @@ public class HtmlStreamRendererTest extends TestCase {
         + "  console.log(example);\n";
 
     renderer.openDocument();
-    renderer.openTag("script", List.<String>of());
+    renderer.openTag("script", Collections.emptyList());
     renderer.text(js);
     renderer.closeTag("script");
     renderer.closeDocument();
@@ -222,7 +223,7 @@ public class HtmlStreamRendererTest extends TestCase {
     String js = "if (x<!--y) { ... }\n";
 
     renderer.openDocument();
-    renderer.openTag("script", List.<String>of());
+    renderer.openTag("script", Collections.emptyList());
     renderer.text(js);
     renderer.closeTag("script");
     renderer.closeDocument();
@@ -240,7 +241,7 @@ public class HtmlStreamRendererTest extends TestCase {
     String js = "if (x-->y) { ... }\n";
 
     renderer.openDocument();
-    renderer.openTag("script", List.<String>of());
+    renderer.openTag("script", Collections.emptyList());
     renderer.text(js);
     renderer.closeTag("script");
     renderer.closeDocument();
@@ -259,7 +260,7 @@ public class HtmlStreamRendererTest extends TestCase {
     String js = "// <!----> <!--->";
 
     renderer.openDocument();
-    renderer.openTag("script", List.<String>of());
+    renderer.openTag("script", Collections.emptyList());
     renderer.text(js);
     renderer.closeTag("script");
     renderer.closeDocument();
@@ -278,7 +279,7 @@ public class HtmlStreamRendererTest extends TestCase {
     String js = "<!-- if ( player<script ) { ... } -->";
 
     renderer.openDocument();
-    renderer.openTag("script", List.<String>of());
+    renderer.openTag("script", Collections.emptyList());
     renderer.text(js);
     renderer.closeTag("script");
     renderer.closeDocument();
@@ -302,7 +303,7 @@ public class HtmlStreamRendererTest extends TestCase {
         + "-->";
 
     renderer.openDocument();
-    renderer.openTag("script", List.<String>of());
+    renderer.openTag("script", Collections.emptyList());
     renderer.text(js);
     renderer.closeTag("script");
     renderer.closeDocument();
@@ -322,10 +323,10 @@ public class HtmlStreamRendererTest extends TestCase {
     String str = "// <!----> <!---> <!--";
 
     renderer.openDocument();
-    renderer.openTag("title", List.<String>of());
+    renderer.openTag("title", Collections.emptyList());
     renderer.text(str);
     renderer.closeTag("title");
-    renderer.openTag("textarea", List.<String>of());
+    renderer.openTag("textarea", Collections.emptyList());
     renderer.text(str);
     renderer.closeTag("textarea");
     renderer.closeDocument();
@@ -338,9 +339,9 @@ public class HtmlStreamRendererTest extends TestCase {
 
   public final void testTagInCdata() throws Exception {
     renderer.openDocument();
-    renderer.openTag("script", List.<String>of());
+    renderer.openTag("script", Collections.emptyList());
     renderer.text("alert('");
-    renderer.openTag("b", List.<String>of());
+    renderer.openTag("b", Collections.emptyList());
     renderer.text("foo");
     renderer.closeTag("b");
     renderer.text("')");
@@ -359,7 +360,7 @@ public class HtmlStreamRendererTest extends TestCase {
 
   public final void testUnclosedEscapingTextSpan() throws Exception {
     renderer.openDocument();
-    renderer.openTag("script", List.<String>of());
+    renderer.openTag("script", Collections.emptyList());
     renderer.text("<!--alert('</script>')");
     renderer.closeTag("script");
     renderer.closeDocument();
@@ -373,7 +374,7 @@ public class HtmlStreamRendererTest extends TestCase {
 
   public final void testAlmostCompleteEndTag() throws Exception {
     renderer.openDocument();
-    renderer.openTag("script", List.<String>of());
+    renderer.openTag("script", Collections.emptyList());
     renderer.text("//</scrip");
     renderer.closeTag("script");
     renderer.closeDocument();
@@ -383,7 +384,7 @@ public class HtmlStreamRendererTest extends TestCase {
 
   public final void testBalancedCommentInNoscript() throws Exception {
     renderer.openDocument();
-    renderer.openTag("noscript", List.<String>of());
+    renderer.openTag("noscript", Collections.emptyList());
     renderer.text("<!--<script>foo</script>-->");
     renderer.closeTag("noscript");
     renderer.closeDocument();
@@ -395,10 +396,10 @@ public class HtmlStreamRendererTest extends TestCase {
 
   public final void testUnbalancedCommentInNoscript() throws Exception {
     renderer.openDocument();
-    renderer.openTag("noscript", List.<String>of());
+    renderer.openTag("noscript", Collections.emptyList());
     renderer.text("<!--<script>foo</script>--");
     renderer.closeTag("noscript");
-    renderer.openTag("noscript", List.<String>of());
+    renderer.openTag("noscript", Collections.emptyList());
     renderer.text("<script>foo</script>-->");
     renderer.closeTag("noscript");
     renderer.closeDocument();
@@ -422,7 +423,7 @@ public class HtmlStreamRendererTest extends TestCase {
 
   public final void testPreSubstitutes1() throws Exception {
     renderer.openDocument();
-    renderer.openTag("Xmp", List.<String>of());
+    renderer.openTag("Xmp", Collections.emptyList());
     renderer.text("<form>Hello, World</form>");
     renderer.closeTag("Xmp");
     renderer.closeDocument();
@@ -433,7 +434,7 @@ public class HtmlStreamRendererTest extends TestCase {
 
   public final void testPreSubstitutes2() throws Exception {
     renderer.openDocument();
-    renderer.openTag("xmp", List.<String>of());
+    renderer.openTag("xmp", Collections.emptyList());
     renderer.text("<form>Hello, World</form>");
     renderer.closeTag("xmp");
     renderer.closeDocument();
@@ -444,7 +445,7 @@ public class HtmlStreamRendererTest extends TestCase {
 
   public final void testPreSubstitutes3() throws Exception {
     renderer.openDocument();
-    renderer.openTag("LISTING", List.<String>of());
+    renderer.openTag("LISTING", Collections.emptyList());
     renderer.text("<form>Hello, World</form>");
     renderer.closeTag("LISTING");
     renderer.closeDocument();
@@ -455,7 +456,7 @@ public class HtmlStreamRendererTest extends TestCase {
 
   public final void testPreSubstitutes4() throws Exception {
     renderer.openDocument();
-    renderer.openTag("plaintext", List.<String>of());
+    renderer.openTag("plaintext", Collections.emptyList());
     renderer.text("<form>Hello, World</form>");
     renderer.closeDocument();
 

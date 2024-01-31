@@ -68,7 +68,7 @@ class ElementAndAttributePolicyBasedSanitizerPolicy
   }
 
   static final Set<String> SKIPPABLE_ELEMENT_CONTENT
-      = Set.of(
+      = CollectionsHelper.setOf(
           "script", "style", "noscript", "nostyle", "noembed", "noframes",
           "iframe", "object", "frame", "frameset", "title");
 

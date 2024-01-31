@@ -28,6 +28,8 @@
 
 package org.owasp.html;
 
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -82,15 +84,17 @@ public enum HtmlTextEscapingMode {
   VOID,
   ;
 
-  private static final Map<String, HtmlTextEscapingMode> ESCAPING_MODES
-      = Map.ofEntries(
-      Map.entry("iframe", CDATA),
+  private static final Map<String, HtmlTextEscapingMode> ESCAPING_MODES;
+  static {
+      final Map<String, HtmlTextEscapingMode> builder = new HashMap<>();
+
+      builder.put("iframe", CDATA);
       // HTML5 does not treat listing as CDATA and treats XMP as deprecated,
       // but HTML2 does at
       // http://www.w3.org/MarkUp/1995-archive/NonStandard.html
       // Listing is not supported by browsers.
-      Map.entry("listing", CDATA_SOMETIMES),
-      Map.entry("xmp", CDATA),
+      builder.put("listing", CDATA_SOMETIMES);
+      builder.put("xmp", CDATA);
 
       // Technically, noembed, noscript and noframes are CDATA_SOMETIMES but
       // we can only be hurt by allowing tag content that looks like text so
@@ -98,41 +102,43 @@ public enum HtmlTextEscapingMode {
       //.put("noembed", CDATA_SOMETIMES)
       //.put("noframes", CDATA_SOMETIMES)
       //.put("noscript", CDATA_SOMETIMES)
-      Map.entry("comment", CDATA_SOMETIMES),  // IE only
+      builder.put("comment", CDATA_SOMETIMES);  // IE only
 
       // Runs till end of file.
-      Map.entry("plaintext", PLAIN_TEXT),
+      builder.put("plaintext", PLAIN_TEXT);
 
-      Map.entry("script", CDATA),
-      Map.entry("style", CDATA),
+      builder.put("script", CDATA);
+      builder.put("style", CDATA);
 
       // Textarea and Title are RCDATA, not CDATA, so decode entity references.
-      Map.entry("textarea", RCDATA),
-      Map.entry("title", RCDATA),
+      builder.put("textarea", RCDATA);
+      builder.put("title", RCDATA);
 
       // Nodes that can't contain content.
       // http://www.w3.org/TR/html-markup/syntax.html#void-elements
-      Map.entry("area", VOID),
-      Map.entry("base", VOID),
-      Map.entry("br", VOID),
-      Map.entry("col", VOID),
-      Map.entry("command", VOID),
-      Map.entry("embed", VOID),
-      Map.entry("hr", VOID),
-      Map.entry("img", VOID),
-      Map.entry("input", VOID),
-      Map.entry("keygen", VOID),
-      Map.entry("link", VOID),
-      Map.entry("meta", VOID),
-      Map.entry("param", VOID),
-      Map.entry("source", VOID),
-      Map.entry("track", VOID),
-      Map.entry("wbr", VOID),
+      builder.put("area", VOID);
+      builder.put("base", VOID);
+      builder.put("br", VOID);
+      builder.put("col", VOID);
+      builder.put("command", VOID);
+      builder.put("embed", VOID);
+      builder.put("hr", VOID);
+      builder.put("img", VOID);
+      builder.put("input", VOID);
+      builder.put("keygen", VOID);
+      builder.put("link", VOID);
+      builder.put("meta", VOID);
+      builder.put("param", VOID);
+      builder.put("source", VOID);
+      builder.put("track", VOID);
+      builder.put("wbr", VOID);
 
        // EMPTY per http://www.w3.org/TR/REC-html32#basefont
-      Map.entry("basefont", VOID),
-      Map.entry("isindex", VOID));
+      builder.put("basefont", VOID);
+      builder.put("isindex", VOID);
 
+      ESCAPING_MODES = Collections.unmodifiableMap(builder);
+  }
 
   /**
    * The mode used for content following a start tag with the given name.

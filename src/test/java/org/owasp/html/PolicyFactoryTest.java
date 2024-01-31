@@ -123,7 +123,7 @@ public final class PolicyFactoryTest extends TestCase {
       final StringBuilder out = new StringBuilder();
 
       // A noisy listener that logs.
-      HtmlChangeListener<Object> listener = new HtmlChangeListener<>() {
+      HtmlChangeListener<Object> listener = new HtmlChangeListener<Object>() {
 
         public void discardedTag(Object ctx, String elementName) {
           assertEquals(context, ctx);
@@ -141,7 +141,7 @@ public final class PolicyFactoryTest extends TestCase {
 
       };
 
-      Handler<IOException> ioHandler = new Handler<>() {
+      Handler<IOException> ioHandler = new Handler<IOException>() {
 
         public void handle(IOException x) {
           log.append("Handled IOException " + x.getMessage() + "\n");
@@ -150,7 +150,7 @@ public final class PolicyFactoryTest extends TestCase {
       };
 
       // Should not be called.
-      Handler<String> badHtmlHandler = new Handler<>() {
+      Handler<String> badHtmlHandler = new Handler<String>() {
 
         public void handle(String x) {
           throw new AssertionError(x);

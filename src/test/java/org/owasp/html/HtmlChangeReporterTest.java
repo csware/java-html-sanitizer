@@ -47,7 +47,7 @@ public class HtmlChangeReporterTest extends TestCase {
     final StringBuilder log = new StringBuilder();
     HtmlStreamRenderer renderer = HtmlStreamRenderer.create(
         out, Handler.DO_NOTHING);
-    HtmlChangeListener<Context> listener = new HtmlChangeListener<>() {
+    HtmlChangeListener<Context> listener = new HtmlChangeListener<Context>() {
       public void discardedTag(Context context, String elementName) {
         assertSame(testContext, context);
         log.append('<').append(elementName).append("> ");

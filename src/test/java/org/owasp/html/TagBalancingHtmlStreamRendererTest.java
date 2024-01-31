@@ -31,6 +31,7 @@ package org.owasp.html;
 import static org.owasp.html.TagBalancingHtmlStreamEventReceiver
               .isInterElementWhitespace;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.junit.Before;
@@ -60,17 +61,17 @@ public class TagBalancingHtmlStreamRendererTest extends TestCase {
   @Test
   public final void testTagBalancing() {
     balancer.openDocument();
-	balancer.openTag("html", List.<String>of());
-	balancer.openTag("head", List.<String>of());
-	balancer.openTag("title", List.<String>of());
+    balancer.openTag("html", Collections.emptyList());
+    balancer.openTag("head", Collections.emptyList());
+    balancer.openTag("title", Collections.emptyList());
     balancer.text("Hello, <<World>>!");
     // TITLE closed with case-sensitively different name.
     balancer.closeTag("TITLE");
     balancer.closeTag("head");
-	balancer.openTag("body", List.<String>of());
-	balancer.openTag("p", List.of("id", "p'0"));
+    balancer.openTag("body", Collections.emptyList());
+    balancer.openTag("p", CollectionsHelper.listOf("id", "p'0"));
     balancer.text("Hello,");
-	balancer.openTag("Br", List.<String>of());
+    balancer.openTag("Br", Collections.emptyList());
     balancer.text("<<World>>!");
     // HTML, P, and BODY unclosed, but BR not.
     balancer.closeDocument();
@@ -85,9 +86,9 @@ public class TagBalancingHtmlStreamRendererTest extends TestCase {
   @Test
   public final void testTagSoupIronedOut() {
     balancer.openDocument();
-	balancer.openTag("i", List.<String>of());
+    balancer.openTag("i", Collections.emptyList());
     balancer.text("x");
-	balancer.openTag("b", List.<String>of());
+    balancer.openTag("b", Collections.emptyList());
     balancer.text("y");
     balancer.closeTag("i");
     balancer.text("z");
@@ -101,12 +102,12 @@ public class TagBalancingHtmlStreamRendererTest extends TestCase {
   @Test
   public final void testListInListDirectly() {
     balancer.openDocument();
-	balancer.openTag("ul", List.<String>of());
-	balancer.openTag("li", List.<String>of());
+    balancer.openTag("ul", Collections.emptyList());
+    balancer.openTag("li", Collections.emptyList());
     balancer.text("foo");
     balancer.closeTag("li");
-	balancer.openTag("ul", List.<String>of());
-	balancer.openTag("li", List.<String>of());
+    balancer.openTag("ul", Collections.emptyList());
+    balancer.openTag("li", Collections.emptyList());
     balancer.text("bar");
     balancer.closeTag("li");
     balancer.closeTag("ul");
@@ -121,28 +122,28 @@ public class TagBalancingHtmlStreamRendererTest extends TestCase {
   @Test
   public final void testTextContent() {
     balancer.openDocument();
-	balancer.openTag("title", List.<String>of());
+    balancer.openTag("title", Collections.emptyList());
     balancer.text("Hello, World!");
     balancer.closeTag("title");
     balancer.text("Hello, ");
-	balancer.openTag("b", List.<String>of());
+    balancer.openTag("b", Collections.emptyList());
     balancer.text("World!");
     balancer.closeTag("b");
-	balancer.openTag("p", List.<String>of());
+    balancer.openTag("p", Collections.emptyList());
     balancer.text("Hello, ");
-	balancer.openTag("textarea", List.<String>of());
+    balancer.openTag("textarea", Collections.emptyList());
     balancer.text("World!");
     balancer.closeTag("textarea");
     balancer.closeTag("p");
-	balancer.openTag("h1", List.<String>of());
+    balancer.openTag("h1", Collections.emptyList());
     balancer.text("Hello");
-	balancer.openTag("style", List.<String>of("type", "text/css"));
+    balancer.openTag("style", CollectionsHelper.listOf("type", "text/css"));
     balancer.text("\n.World {\n  color: blue\n}\n");
     balancer.closeTag("style");
     balancer.closeTag("h1");
-	balancer.openTag("ul", List.<String>of());
+    balancer.openTag("ul", Collections.emptyList());
     balancer.text("\n  ");
-	balancer.openTag("li", List.<String>of());
+    balancer.openTag("li", Collections.emptyList());
     balancer.text("Hello,");
     balancer.closeTag("li");
     balancer.text("\n  ");
@@ -170,20 +171,20 @@ public class TagBalancingHtmlStreamRendererTest extends TestCase {
   @Test
   public final void testMismatchedHeaders() {
     balancer.openDocument();
-	balancer.openTag("H1", List.<String>of());
+    balancer.openTag("H1", Collections.emptyList());
     balancer.text("header");
     balancer.closeTag("h1");
     balancer.text("body");
-	balancer.openTag("H2", List.<String>of());
+    balancer.openTag("H2", Collections.emptyList());
     balancer.text("sub-header");
     balancer.closeTag("h3");
     balancer.text("sub-body");
-	balancer.openTag("h3", List.<String>of());
+    balancer.openTag("h3", Collections.emptyList());
     balancer.text("sub-sub-");
     balancer.closeTag("hr"); // hr is not a header tag so does not close an h3.
     balancer.text("header");
     // <h3> is not allowed in h3.
-	balancer.openTag("h3", List.<String>of());
+    balancer.openTag("h3", Collections.emptyList());
     balancer.closeTag("h3");
     balancer.text("sub-sub-body");
     balancer.closeTag("H4");
@@ -201,10 +202,10 @@ public class TagBalancingHtmlStreamRendererTest extends TestCase {
   @Test
   public final void testListNesting() {
     balancer.openDocument();
-	balancer.openTag("ul", List.<String>of());
-	balancer.openTag("li", List.<String>of());
-	balancer.openTag("ul", List.<String>of());
-	balancer.openTag("li", List.<String>of());
+    balancer.openTag("ul", Collections.emptyList());
+    balancer.openTag("li", Collections.emptyList());
+    balancer.openTag("ul", Collections.emptyList());
+    balancer.openTag("li", Collections.emptyList());
     balancer.text("foo");
     balancer.closeTag("li");
     // Does not closes the second <ul> since only </ol> and </ul> can close a
@@ -212,8 +213,8 @@ public class TagBalancingHtmlStreamRendererTest extends TestCase {
     // tree building algo.
     balancer.closeTag("li");
     // This would append inside a list, not an item.  We insert an <li>.
-	balancer.openTag("ul", List.<String>of());
-	balancer.openTag("li", List.<String>of());
+    balancer.openTag("ul", Collections.emptyList());
+    balancer.openTag("li", Collections.emptyList());
     balancer.text("bar");
     balancer.closeDocument();
 
@@ -225,18 +226,18 @@ public class TagBalancingHtmlStreamRendererTest extends TestCase {
   @Test
   public final void testTableNesting() {
     balancer.openDocument();
-	balancer.openTag("table", List.<String>of());
-	balancer.openTag("tbody", List.<String>of());
-	balancer.openTag("tr", List.<String>of());
-	balancer.openTag("td", List.<String>of());
-    balancer.text("foo");
-    balancer.closeTag("td");
-    // Chrome does not insert a td to contain this mis-nested table.
-    // Instead, it ends one table and starts another.
-	balancer.openTag("table", List.<String>of());
-	balancer.openTag("tbody", List.<String>of());
-	balancer.openTag("tr", List.<String>of());
-	balancer.openTag("th", List.<String>of());
+    balancer.openTag("table", Collections.emptyList());
+    balancer.openTag("tbody", Collections.emptyList());
+    balancer.openTag("tr", Collections.emptyList());
+    balancer.openTag("td", Collections.emptyList());
+     balancer.text("foo");
+     balancer.closeTag("td");
+     // Chrome does not insert a td to contain this mis-nested table.
+     // Instead, it ends one table and starts another.
+    balancer.openTag("table", Collections.emptyList());
+    balancer.openTag("tbody", Collections.emptyList());
+    balancer.openTag("tr", Collections.emptyList());
+    balancer.openTag("th", Collections.emptyList());
     balancer.text("bar");
     balancer.closeTag("table");
     balancer.closeTag("table");
@@ -257,7 +258,7 @@ public class TagBalancingHtmlStreamRendererTest extends TestCase {
 
     balancer.setNestingLimit(10);
     balancer.openDocument();
-	List<String> attrs = List.<String>of();
+    List<String> attrs = Collections.emptyList();
     for (int i = 20000; --i >= 0;) {
       balancer.openTag("div", attrs);
     }
@@ -273,29 +274,29 @@ public class TagBalancingHtmlStreamRendererTest extends TestCase {
   public final void testTablesGuarded() {
     // Derived from issue 12.
     balancer.openDocument();
-	balancer.openTag("html", List.<String>of());
-	balancer.openTag("head", List.<String>of());
-	balancer.openTag("meta", List.<String>of());
+    balancer.openTag("html", Collections.emptyList());
+    balancer.openTag("head", Collections.emptyList());
+    balancer.openTag("meta", Collections.emptyList());
     balancer.closeTag("head");
-	balancer.openTag("body", List.<String>of());
-	balancer.openTag("p", List.<String>of());
+    balancer.openTag("body", Collections.emptyList());
+    balancer.openTag("p", Collections.emptyList());
     balancer.text("Hi");
     balancer.closeTag("p");
-	balancer.openTag("p", List.<String>of());
+    balancer.openTag("p", Collections.emptyList());
     balancer.text("How are you");
     balancer.closeTag("p");
     balancer.text("\n");
-	balancer.openTag("ul", List.<String>of());
-	balancer.openTag("li", List.<String>of());
-	balancer.openTag("table", List.<String>of());
-	balancer.openTag("tbody", List.<String>of());
-	balancer.openTag("tr", List.<String>of());
+    balancer.openTag("ul", Collections.emptyList());
+    balancer.openTag("li", Collections.emptyList());
+    balancer.openTag("table", Collections.emptyList());
+    balancer.openTag("tbody", Collections.emptyList());
+    balancer.openTag("tr", Collections.emptyList());
     for (int i = 2; --i >= 0;) {
-		balancer.openTag("td", List.<String>of());
-		balancer.openTag("b", List.<String>of());
-		balancer.openTag("font", List.<String>of());
-		balancer.openTag("font", List.<String>of());
-		balancer.openTag("p", List.<String>of());
+      balancer.openTag("td", Collections.emptyList());
+      balancer.openTag("b", Collections.emptyList());
+      balancer.openTag("font", Collections.emptyList());
+      balancer.openTag("font", Collections.emptyList());
+      balancer.openTag("p", Collections.emptyList());
       balancer.text("Cell");
       balancer.closeTag("p");
       balancer.closeTag("font");
@@ -309,7 +310,7 @@ public class TagBalancingHtmlStreamRendererTest extends TestCase {
     balancer.closeTag("table");
     balancer.closeTag("ul");
     balancer.text("\n");
-	balancer.openTag("p", List.<String>of());
+    balancer.openTag("p", Collections.emptyList());
     balancer.text("x");
     balancer.closeTag("p");
     balancer.closeTag("body");
@@ -348,11 +349,11 @@ public class TagBalancingHtmlStreamRendererTest extends TestCase {
 
   @Test
   public final void testAnchorTransparentToBlock() {
-		List<String> hrefOnly = List.of("href", "");
+    List<String> hrefOnly = CollectionsHelper.listOf("href", "");
     balancer.openDocument();
-		balancer.openTag("div", List.<String>of());
+    balancer.openTag("div", Collections.emptyList());
     balancer.openTag("a", hrefOnly);
-		balancer.openTag("div", List.<String>of());
+    balancer.openTag("div", Collections.emptyList());
     balancer.text("...");
     balancer.closeTag("div");
     balancer.closeTag("a");
@@ -367,11 +368,11 @@ public class TagBalancingHtmlStreamRendererTest extends TestCase {
 
   @Test
   public final void testAnchorTransparentToSpans() {
-		List<String> hrefOnly = List.of("href", "");
+    List<String> hrefOnly = CollectionsHelper.listOf("href", "");
     balancer.openDocument();
-		balancer.openTag("span", List.<String>of());
+    balancer.openTag("span", Collections.emptyList());
     balancer.openTag("a", hrefOnly);
-		balancer.openTag("span", List.<String>of());
+    balancer.openTag("span", Collections.emptyList());
     balancer.text("...");
     balancer.closeTag("span");
     balancer.closeTag("a");
@@ -386,11 +387,11 @@ public class TagBalancingHtmlStreamRendererTest extends TestCase {
 
   @Test
   public final void testAnchorWithInlineInBlock() {
-		List<String> hrefOnly = List.of("href", "");
+    List<String> hrefOnly = CollectionsHelper.listOf("href", "");
     balancer.openDocument();
-		balancer.openTag("div", List.<String>of());
+    balancer.openTag("div", Collections.emptyList());
     balancer.openTag("a", hrefOnly);
-		balancer.openTag("span", List.<String>of());
+    balancer.openTag("span", Collections.emptyList());
     balancer.text("...");
     balancer.closeTag("span");
     balancer.closeTag("a");
@@ -404,9 +405,9 @@ public class TagBalancingHtmlStreamRendererTest extends TestCase {
 
   @Test
   public final void testDirectlyNestedAnchor() {
-		List<String> hrefOnly = List.of("href", "");
+    List<String> hrefOnly = CollectionsHelper.listOf("href", "");
     balancer.openDocument();
-		balancer.openTag("span", List.<String>of());
+    balancer.openTag("span", Collections.emptyList());
     balancer.openTag("a", hrefOnly);
     balancer.openTag("a", hrefOnly);
     balancer.text("...");
@@ -423,11 +424,11 @@ public class TagBalancingHtmlStreamRendererTest extends TestCase {
 
   @Test
   public final void testAnchorClosedWhenBlockInInline() {
-		List<String> hrefOnly = List.of("href", "");
+    List<String> hrefOnly = CollectionsHelper.listOf("href", "");
     balancer.openDocument();
-		balancer.openTag("span", List.<String>of());
+    balancer.openTag("span", Collections.emptyList());
     balancer.openTag("a", hrefOnly);
-		balancer.openTag("div", List.<String>of());
+    balancer.openTag("div", Collections.emptyList());
     balancer.text("...");
     balancer.closeTag("div");
     balancer.closeTag("a");
@@ -446,11 +447,11 @@ public class TagBalancingHtmlStreamRendererTest extends TestCase {
   @Test
   @Ignore
   public final void failingtestAnchorInAnchorIndirectly() {
-		List<String> hrefOnly = List.of("href", "");
+    List<String> hrefOnly = CollectionsHelper.listOf("href", "");
     balancer.openDocument();
-		balancer.openTag("div", List.<String>of());
+    balancer.openTag("div", Collections.emptyList());
     balancer.openTag("a", hrefOnly);
-		balancer.openTag("div", List.<String>of());
+    balancer.openTag("div", Collections.emptyList());
     balancer.openTag("a", hrefOnly);
     balancer.text("...");
     balancer.closeTag("a");
@@ -466,12 +467,12 @@ public class TagBalancingHtmlStreamRendererTest extends TestCase {
 
   @Test
   public final void testInteractiveInAnchorIndirectly() {
-		List<String> hrefOnly = List.of("href", "");
+    List<String> hrefOnly = CollectionsHelper.listOf("href", "");
     balancer.openDocument();
-		balancer.openTag("div", List.<String>of());
+    balancer.openTag("div", Collections.emptyList());
     balancer.openTag("a", hrefOnly);
-		balancer.openTag("div", List.<String>of());
-		balancer.openTag("video", List.<String>of());
+    balancer.openTag("div", Collections.emptyList());
+    balancer.openTag("video", Collections.emptyList());
     balancer.closeTag("video");
     balancer.closeTag("div");
     balancer.closeTag("a");
@@ -484,10 +485,10 @@ public class TagBalancingHtmlStreamRendererTest extends TestCase {
 
   @Test
   public final void testAnchorWithBlockAtTopLevel() {
-		List<String> hrefOnly = List.of("href", "");
+    List<String> hrefOnly = CollectionsHelper.listOf("href", "");
     balancer.openDocument();
     balancer.openTag("a", hrefOnly);
-	balancer.openTag("div", List.<String>of());
+    balancer.openTag("div", Collections.emptyList());
     balancer.text("...");
     balancer.closeTag("div");
     balancer.closeTag("a");
@@ -500,11 +501,11 @@ public class TagBalancingHtmlStreamRendererTest extends TestCase {
   @Test
   public final void testResumedElementsAllowedWhereResumed() {
     balancer.openDocument();
-	balancer.openTag("a", List.<String>of());
-	balancer.openTag("b", List.<String>of());
+    balancer.openTag("a", Collections.emptyList());
+    balancer.openTag("b", Collections.emptyList());
     balancer.text("foo");
-	balancer.openTag("i", List.<String>of());
-	balancer.openTag("a", List.<String>of());
+    balancer.openTag("i", Collections.emptyList());
+    balancer.openTag("a", Collections.emptyList());
     balancer.text("bar");
     balancer.closeTag("a");
     balancer.closeTag("i");
@@ -520,11 +521,11 @@ public class TagBalancingHtmlStreamRendererTest extends TestCase {
   public final void testMenuItemNesting() {
     // issue 96
     balancer.openDocument();
-	balancer.openTag("div", List.<String>of());
-	balancer.openTag("menu", List.<String>of());
-	balancer.openTag("menuitem", List.<String>of());
+    balancer.openTag("div", Collections.emptyList());
+    balancer.openTag("menu", Collections.emptyList());
+    balancer.openTag("menuitem", Collections.emptyList());
     balancer.closeTag("menuitem");
-	balancer.openTag("menuitem", List.<String>of());
+    balancer.openTag("menuitem", Collections.emptyList());
     balancer.closeTag("menuitem");
     balancer.closeTag("menu");
     balancer.closeTag("div");

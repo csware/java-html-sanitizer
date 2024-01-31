@@ -584,7 +584,7 @@ public class SanitizersTest extends TestCase {
     }
 
     public Iterator<List<T>> iterator() {
-      return new Iterator<>() {
+      return new Iterator<List<T>>() {
         private int i;
         private final int limit;
         private final BitSet mask;

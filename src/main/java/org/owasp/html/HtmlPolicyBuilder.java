@@ -163,7 +163,7 @@ public class HtmlPolicyBuilder {
    * output.
    */
   public static final Set<String> DEFAULT_SKIP_IF_EMPTY
-      = Set.of("a", "font", "img", "input", "span");
+      = CollectionsHelper.setOf("a", "font", "img", "input", "span");
 
   static final Map<String, HtmlTagSkipType> DEFAULT_SKIP_TAG_MAP_IF_EMPTY_ATTR;
   static {
@@ -185,7 +185,7 @@ public class HtmlPolicyBuilder {
    *      >About rel=noopener</a>
    */
   public static final List<String> DEFAULT_RELS_ON_TARGETTED_LINKS
-      = List.of("noopener", "noreferrer");
+      = CollectionsHelper.listOf("noopener", "noreferrer");
 
   static final String DEFAULT_RELS_ON_TARGETTED_LINKS_STR
       = DEFAULT_RELS_ON_TARGETTED_LINKS.stream().collect(Collectors.joining(" "));
@@ -539,7 +539,7 @@ public class HtmlPolicyBuilder {
     // still not allowing styles when allowStyling is followed by a call to
     // disallowAttributesGlobally("style").
     this.allowAttributesGlobally(
-        AttributePolicy.IDENTITY_ATTRIBUTE_POLICY, List.of("style"));
+        AttributePolicy.IDENTITY_ATTRIBUTE_POLICY, Collections.singletonList("style"));
 
     return this;
   }
@@ -748,9 +748,9 @@ public class HtmlPolicyBuilder {
       if (linkPolicy != null) {
         RelsOnLinksPolicy relsOnLinksPolicy = RelsOnLinksPolicy.create(
             this.extraRelsForLinks != null
-            ? this.extraRelsForLinks : Set.<String>of(),
+            ? this.extraRelsForLinks : Collections.emptySet(),
             this.skipRelsForLinks != null
-            ? this.skipRelsForLinks : Set.<String>of());
+            ? this.skipRelsForLinks : Collections.emptySet());
         elPolicies.put(
             "a",
             ElementPolicy.Util.join(linkPolicy, relsOnLinksPolicy));
@@ -810,7 +810,7 @@ public class HtmlPolicyBuilder {
       Map<String, AttributePolicy> elAttrPolicies
           = attrPolicies.get(elementName);
       if (elAttrPolicies == null) {
-        elAttrPolicies = Map.of();
+        elAttrPolicies = Collections.emptyMap();
       }
 
       Map<String, AttributePolicy> attrsBuilder
@@ -928,7 +928,7 @@ public class HtmlPolicyBuilder {
      */
     public AttributeBuilder matching(
         boolean ignoreCase, String... allowedValues) {
-      return matching(ignoreCase, Set.of(allowedValues));
+      return matching(ignoreCase, CollectionsHelper.setOf(allowedValues));
     }
 
     /**
@@ -995,7 +995,7 @@ public class HtmlPolicyBuilder {
     final List<String> whenTargetPresent;
 
     static final RelsOnLinksPolicy EMPTY = new RelsOnLinksPolicy(
-        Set.<String>of(), Set.<String>of());
+      Collections.emptySet(), Collections.emptySet());
 
     static RelsOnLinksPolicy create(
         Set<? extends String> extra,

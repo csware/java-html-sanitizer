@@ -88,9 +88,8 @@ application while protecting against XSS.
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <maven.compiler.source>9</maven.compiler.source>
-    <maven.compiler.target>9</maven.compiler.target>
-    <maven.compiler.release>9</maven.compiler.release>
+    <maven.compiler.source>8</maven.compiler.source>
+    <maven.compiler.target>${maven.compiler.source}</maven.compiler.target>
   </properties>
 
 
@@ -266,6 +265,15 @@ application while protecting against XSS.
   </dependencyManagement>
 
   <profiles>
+    <profile>
+      <id>set-compiler-release</id>
+      <activation>
+        <jdk>[9,)</jdk>
+      </activation>
+      <properties>
+         <maven.compiler.release>${maven.compiler.source}</maven.compiler.release>
+      </properties>
+    </profile>
     <profile>
       <id>release-sign-artifact</id>
       <activation>

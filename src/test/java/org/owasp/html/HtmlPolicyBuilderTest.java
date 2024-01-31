@@ -32,8 +32,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -247,7 +245,7 @@ public class HtmlPolicyBuilderTest extends TestCase {
               .allowCommonInlineFormattingElements()
               .allowCommonBlockElements()
               .allowStyling(CssSchema.withProperties(
-                  List.of("color", "text-align", "font-size")))
+                  CollectionsHelper.setOf("color", "text-align", "font-size")))
               .allowStandardUrlProtocols()));
   }
 
@@ -268,9 +266,9 @@ public class HtmlPolicyBuilderTest extends TestCase {
               .allowCommonBlockElements()
               .allowStyling(
                   CssSchema.withProperties(
-                      Map.of("text-align",
+                      CollectionsHelper.mapOf("text-align",
                           new CssSchema.Property(0,
-                              Set.of("center"),
+                              CollectionsHelper.setOf("center"),
                               Collections.emptyMap()))))
               .allowStandardUrlProtocols()));
   }
@@ -291,9 +289,9 @@ public class HtmlPolicyBuilderTest extends TestCase {
               .allowCommonInlineFormattingElements()
               .allowCommonBlockElements()
               .allowStyling(CssSchema.withProperties(
-                  List.of("color", "text-align")))
+                   CollectionsHelper.listOf("color", "text-align")))
               .allowStyling( // union allowed style properties
-                   CssSchema.withProperties(List.of("font-size")))
+                   CssSchema.withProperties(CollectionsHelper.listOf("font-size")))
               .allowStandardUrlProtocols()));
   }
 
@@ -314,9 +312,9 @@ public class HtmlPolicyBuilderTest extends TestCase {
               .allowCommonBlockElements()
               .allowStyling(
                       CssSchema.withProperties(
-                          Map.of("text-align",
+                          CollectionsHelper.mapOf("text-align",
                               new CssSchema.Property(0,
-                                  Set.of("left", "right"),
+                                  CollectionsHelper.setOf("left", "right"),
                                   Collections.emptyMap()))))
               .allowStandardUrlProtocols()));
   }
@@ -1033,7 +1031,7 @@ public class HtmlPolicyBuilderTest extends TestCase {
   public static final void testOverflowWrap() {
     PolicyFactory pf = new HtmlPolicyBuilder()
         .allowElements("span")
-        .allowStyling(CssSchema.union(CssSchema.DEFAULT, CssSchema.withProperties(List.of("overflow-wrap"))))
+        .allowStyling(CssSchema.union(CssSchema.DEFAULT, CssSchema.withProperties(CollectionsHelper.listOf("overflow-wrap"))))
         .toFactory();
 
     assertEquals(
@@ -1204,7 +1202,7 @@ public class HtmlPolicyBuilderTest extends TestCase {
         // allow contents in this script tag
         .allowTextIn("script")
         // keep type attribute in application/json script tag
-        .allowAttributes("type").matching(true, Set.of("application/json")).onElements("script")
+        .allowAttributes("type").matching(true, Collections.singleton("application/json")).onElements("script")
         .toFactory();
 
     String mismatchedHtmlComments = "<script type=\"application/json\">\n" +

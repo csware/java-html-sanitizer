@@ -47,7 +47,7 @@ public final class ElementPolicyTest extends TestCase {
     assertEquals(p.toString(), Arrays.asList(expected), actual);
   }
 
-  private static List<String> TEST_EL_NAMES = List.of(
+  private static List<String> TEST_EL_NAMES = CollectionsHelper.listOf(
       "abacus", "abracadabra", "bar", "foo", "far", "cadr", "cdr");
 
   @Test

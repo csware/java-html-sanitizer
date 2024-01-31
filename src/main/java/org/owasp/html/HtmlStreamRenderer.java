@@ -481,5 +481,5 @@ public class HtmlStreamRenderer implements HtmlStreamEventReceiver {
     return ch < 63 && 0 != (TAG_ENDS & (1L << ch));
   }
 
-  private static final Set<String> foreignContentRootElementNames = Set.of("svg", "math");
+  private static final Set<String> foreignContentRootElementNames = CollectionsHelper.setOf("svg", "math");
 }

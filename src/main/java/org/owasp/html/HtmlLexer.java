@@ -261,12 +261,12 @@ final class HtmlLexer extends AbstractTokenStream {
   }
 
   // From http://issues.apache.org/jira/browse/XALANC-519
-  private static final Set<String> VALUELESS_ATTRIB_NAMES = Set.of(
+  private static final Set<String> VALUELESS_ATTRIB_NAMES = CollectionsHelper.setOf(
       "checked", "compact", "declare", "defer", "disabled",
       "ismap", "multiple", "nohref", "noresize", "noshade",
       "nowrap", "readonly", "selected");
 
-  private static final Set<String> mixedCaseForeignAttributeNames = Set.of(
+  private static final Set<String> mixedCaseForeignAttributeNames = CollectionsHelper.setOf(
           "attributeName",
           "attributeType",
           "baseFrequency",
@@ -347,7 +347,7 @@ final class HtmlLexer extends AbstractTokenStream {
           "zoomAndPan"
   );
 
-  private static final Set<String> mixedCaseForeignElementNames = Set.of(
+  private static final Set<String> mixedCaseForeignElementNames = CollectionsHelper.setOf(
           "animateColor",
           "animateMotion",
           "animateTransform",
