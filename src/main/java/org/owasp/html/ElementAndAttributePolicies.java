@@ -48,7 +48,7 @@ final class ElementAndAttributePolicies {
   ElementAndAttributePolicies(
       String elementName,
       ElementPolicy elPolicy,
-      Map<? extends String, ? extends AttributePolicy>
+      Map<String, ? extends AttributePolicy>
         attrPolicies,
       HtmlTagSkipType htmlTagSkipType) {
     this.elementName = elementName;

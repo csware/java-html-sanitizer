@@ -155,7 +155,7 @@ public class HtmlStreamRenderer implements HtmlStreamEventReceiver {
   }
 
   private void writeOpenTag(
-      String unsafeElementName, List<? extends String> attrs)
+      String unsafeElementName, List<String> attrs)
       throws IOException {
     if (!open) { throw new IllegalStateException(); }
     String elementName = safeName(unsafeElementName);
@@ -183,7 +183,7 @@ public class HtmlStreamRenderer implements HtmlStreamEventReceiver {
 
     output.append('<').append(elementName);
 
-    for (Iterator<? extends String> attrIt = attrs.iterator();
+    for (Iterator<String> attrIt = attrs.iterator();
          attrIt.hasNext();) {
       String name = attrIt.next();
       String value = attrIt.next();

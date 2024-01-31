@@ -873,7 +873,7 @@ public class HtmlPolicyBuilder {
     private final List<String> attributeNames;
     private AttributePolicy policy = AttributePolicy.IDENTITY_ATTRIBUTE_POLICY;
 
-    AttributeBuilder(List<? extends String> attributeNames) {
+    AttributeBuilder(List<String> attributeNames) {
       this.attributeNames = List.copyOf(attributeNames);
     }
 
@@ -911,7 +911,7 @@ public class HtmlPolicyBuilder {
      * intersection of possible matched values.
      */
     public AttributeBuilder matching(
-        final Predicate<? super String> filter) {
+        final Predicate<String> filter) {
       return matching(new AttributePolicy() {
         public @Nullable String apply(
             String elementName, String attributeName, String value) {
@@ -938,7 +938,7 @@ public class HtmlPolicyBuilder {
      * intersection of possible matched values.
      */
     public AttributeBuilder matching(
-        final boolean ignoreCase, Set<? extends String> allowedValues) {
+        final boolean ignoreCase, Set<String> allowedValues) {
       final Set<String> allowed = Set.copyOf(allowedValues);
       return matching(new AttributePolicy() {
         public @Nullable String apply(
@@ -999,15 +999,15 @@ public class HtmlPolicyBuilder {
         Set.<String>of(), Set.<String>of());
 
     static RelsOnLinksPolicy create(
-        Set<? extends String> extra,
-        Set<? extends String> skip) {
+        Set<String> extra,
+        Set<String> skip) {
       if (extra.isEmpty() && skip.isEmpty()) { return EMPTY; }
       return new RelsOnLinksPolicy(extra, skip);
     }
 
     RelsOnLinksPolicy(
-        Set<? extends String> extra,
-        Set<? extends String> skip) {
+        Set<String> extra,
+        Set<String> skip) {
       this.extra = Set.copyOf(extra);
       this.skip = Set.copyOf(skip);
       Set<String> targetOnly = new HashSet<>();
