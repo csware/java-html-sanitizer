@@ -18,16 +18,31 @@
 
   <build>
     <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <configuration>
+          <archive>
+            <manifestEntries>
+              <Multi-Release>true</Multi-Release>
+            </manifestEntries>
+          </archive>
+        </configuration>
+      </plugin>
       <!-- http://www.javaworld.com/article/2074515/core-java/
            unit-test-code-coverage-with-maven-and-jacoco.html -->
-      <plugin>
+      <!--<plugin>
         <groupId>org.jacoco</groupId>
-        <artifactId>jacoco-maven-plugin</artifactId>
+        <artifactId>jacoco-maven-plugin</artifactId>-->
         <!--configuration>
           <destFile>${basedir}/target/coverage-reports/jacoco-unit.exec</destFile>
           <dataFile>${basedir}/target/coverage-reports/jacoco-unit.exec</dataFile>
         </configuration-->
-        <executions>
+        <!--<executions>
           <execution>
             <id>jacoco-initialize</id>
             <goals>
@@ -49,7 +64,7 @@
             </goals>
           </execution>
         </executions>
-      </plugin>
+      </plugin>-->
       <plugin>
         <groupId>org.eluder.coveralls</groupId>
         <artifactId>coveralls-maven-plugin</artifactId>
@@ -84,6 +99,73 @@
         </plugin>
     </plugins>
   </build>
+
+  <profiles>
+    <profile>
+      <id>compile-jdk9</id>
+      <activation>
+        <jdk>[9,)</jdk>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>compile-java-9</id>
+                <phase>compile</phase>
+                <goals>
+                  <goal>compile</goal>
+                </goals>
+                <configuration>
+                  <source>9</source>
+                  <target>9</target>
+                  <release>9</release>
+                  <compileSourceRoots>
+                    <compileSourceRoot>${project.basedir}/src/main/java9</compileSourceRoot>
+                  </compileSourceRoots>
+                  <multiReleaseOutput>true</multiReleaseOutput>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>compile-jdk10</id>
+      <activation>
+        <jdk>[10,)</jdk>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>compile-java-10</id>
+                <phase>compile</phase>
+                <goals>
+                  <goal>compile</goal>
+                </goals>
+                <configuration>
+                  <source>10</source>
+                  <target>10</target>
+                  <release>10</release>
+                  <compileSourceRoots>
+                    <compileSourceRoot>${project.basedir}/src/main/java10</compileSourceRoot>
+                  </compileSourceRoots>
+                  <multiReleaseOutput>true</multiReleaseOutput>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+     </build>
+    </profile>
+  </profiles>
 
   <dependencies>
     <dependency>
